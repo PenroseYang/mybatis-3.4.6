@@ -23,6 +23,7 @@ import java.util.Properties;
 import org.apache.ibatis.builder.xml.XMLConfigBuilder;
 import org.apache.ibatis.exceptions.ExceptionFactory;
 import org.apache.ibatis.executor.ErrorContext;
+import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 
 /**
@@ -72,10 +73,20 @@ public class SqlSessionFactoryBuilder {
     return build(inputStream, null, properties);
   }
 
+  /**
+   * xml的解析，就挺简单的
+   * {@link XMLConfigBuilder#parseConfiguration(XNode)}
+   * @param inputStream
+   * @param environment
+   * @param properties
+   * @return
+   */
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
+
       return build(parser.parse());
+
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error building SqlSession.", e);
     } finally {

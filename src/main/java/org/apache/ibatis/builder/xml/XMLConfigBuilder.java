@@ -100,6 +100,10 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /**
+   * xml节点的解析真的就巨简单，这里就是把各种你写在xml节点里面的东西以一种结构化的方式存起来了
+   * @param root
+   */
   private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first
